@@ -9,7 +9,7 @@
 <form id="openai-form" action="" method="post" enctype="multipart/form-data" class="mt-24"> 		
 	@csrf
 	<div class="row">	
-		<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
+		<div id="sidebar" class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
 			<div class="card border-0" id="template-input">
 				<div class="card-body p-5 pb-0">
 
@@ -187,7 +187,7 @@
 			</div>			
 		</div>
 
-		<div class="col-xl-8 col-lg-6 col-md-12 col-sm-12">
+		<div id="content" class="col-xl-8 col-lg-6 col-md-12 col-sm-12">
 			<div class="card border-0" id="template-output">
 				<div class="card-body p-5">
 					<div class="row">						
@@ -241,6 +241,8 @@
 				</div>
 			</div>
 		</div>
+		@include("default.user.rewriter.collection-file-citation")
+		@include("default.user.rewriter.upload-citation")
 	</div>
 </form>
 @endsection
@@ -249,6 +251,11 @@
 <script src="{{URL::asset('plugins/sweetalert/sweetalert2.all.min.js')}}"></script>
 <script src="{{URL::asset('plugins/tinymce/tinymce.min.js')}}"></script>
 <script src="{{theme_url('js/export.js')}}"></script>
+<script src="{{URL::asset('js/pdf.js')}}"></script>
+<script src="{{URL::asset('js/citation.js')}}"></script>
+<script src="{{URL::asset('js/xml2json.js')}}"></script>
+<script src="{{URL::asset('js/lodash.js')}}"></script>
+<script src="{{URL::asset('js/function.js')}}"></script>
 <script type="text/javascript">
 	let loading = `<span class="loading">
 					<span style="background-color: #fff;"></span>
@@ -276,6 +283,7 @@
 			toolbar: 'AIMain AIOptions | styles | bold italic underline | alignleft aligncenter alignright | bullist numlist | forecolor backcolor emoticons | image link code | blockquote | undo redo',
 			contextmenu: 'customwrite | rewrite summarize improve simplify expand trim fixgrammar tone style translate | copy paste',
 			setup: function ( editor ) {
+				tinyEditor = editor;
 				const menuItems = {
 					'customwrite': {
 						icon: 'icon',
@@ -365,6 +373,86 @@
 							} );
 						}
 					},
+					'Citation': {
+						icon: 'iconRewrite',
+						text: '{{ __('Citation') }}',
+						onAction: function () {
+
+					
+							tinymce.activeEditor.windowManager.open({
+  title: '', // The dialog's title - displayed in the dialog header
+  body: {
+    type: 'panel', // The root body type - a Panel or TabPanel
+    items: [ // A list of panel components
+      {
+        type: 'htmlpanel', // an HTML panel component
+        html: `
+		<div class="dialog-header" >
+			<div id="tabs-btn" style="display:flex;gap:10px" >
+			<span onclick="changeBtn('all')" class="dialog-btn tab-selected">All</span>
+			<span onclick="changeBtn('discover')" class="dialog-btn">Discover</span>
+			<span onclick="changeBtn('library')" class="dialog-btn">Library</span>
+		
+			</div>
+			<select id="filter-select"  class="dialog-select">
+			<option value="relevance">Relevance</option>
+			<option value="lastUpdatedDate">Most Recent</option>
+			<option value="submittedDate">Oldest</option>
+			</select>
+		</div>
+		<div class="dialog-contents" id="dialog-articles"></div>
+		<div class="dialog-contents" id="dialog-discover"></div>
+		<div class="dialog-contents" id="dialog-library"></div>
+		`
+      }
+    ]
+  },
+  buttons: [ // A list of footer buttons
+    {
+      type: 'submit',
+      text: 'Add Custom Citation',
+	  
+    }
+  ],
+  onSubmit: (api) => { 
+	
+	api.close();
+	let sidebar = document.getElementById("sidebar");
+							let content = document.getElementById("content");
+							let upload_citation = document.getElementById("upload-citation");
+							
+							upload_citation.style.display = "block";
+							sidebar.classList.remove("col-xl-4");
+							content.classList.remove("col-xl-8");
+							sidebar.classList.add("col-xl-3");
+							content.classList.add("col-xl-6");
+
+  }
+});
+getAll(editor.selection.getContent().trim());
+	document.getElementById('filter-select').addEventListener('change', function(e) {
+		sort_by = e?.target?.value;
+		getAll(editor.selection.getContent().trim())
+		});
+
+
+let iframe = document.getElementById("tinymce-editor_ifr");
+if(!iframe.contentWindow.document.getElementById("refrence-header")){
+	editor.dom.add(editor.getBody(), 'div', {'id' : 'refrence-header'});
+	editor.dom.add(editor.getBody(), 'div', {'id' : 'refrence-content'});
+}
+
+
+
+							if(editor.selection.getContent().trim().length == 0) {
+								toastr.warning('{{ __("Please highlight your target text first") }}');
+								return;
+							}
+							
+						
+						}
+					},
+					
 					'summarize': {
 						icon: 'iconSummarize',
 						text: '{{ __('Summarize Content') }}',

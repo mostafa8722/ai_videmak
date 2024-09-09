@@ -1,0 +1,43 @@
+<div id="collection-file-citation" class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+			<div class="card border-0 template-input-update" >
+				<div class="card-body p-5 pb-0">
+
+				<span id="close-collection" class="close-search"><img src="/img/close.png" /></span>
+
+					<div class="row">
+									
+						
+					<div class="col-sm-12">
+							<div class="input-box">	
+                            <h6 class="fs-11 mb-2 font-weight-semibold flex"><img class="folder-collection" src="/img/folder.png" />{{ __('Search in this  collection') }} </h6>
+							
+								<div class="form-group mt-2 search-doi">						    
+									<input  type="text" class="form-control " id="collection-ciation" name="prompt" placeholder="{{ __('Search in this collection ...') }}" />
+                  <span class="search-btn" id="search-collection-btn"><img src="/img/search.svg" /></span>
+									<span>
+                                     
+                                    </span>
+								</div> 
+							</div> 
+						</div>	
+
+                        <div class="col-sm-12" id="sidebar-collection-citations">
+						
+                                
+
+                                   
+                                 
+                                 
+                            </div>
+						</div>	
+
+
+					
+
+					</div>						
+
+				
+			
+				</div>
+			</div>			
+		</div>

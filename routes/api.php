@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\OpenAIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,4 +120,8 @@ Route::middleware('auth:api')->group(function () {
         
 
     });
+});
+Route::group(['prefix' => 'v1'], function() {
+    
+    Route::get('/search',[OpenAIController::class, 'index']);
 });
