@@ -1,0 +1,51 @@
+{
+  "public/themes/classic/img/files/waves.png": {
+    "file": "assets/waves-B9y7BHj0.png",
+    "src": "public/themes/classic/img/files/waves.png"
+  },
+  "public/themes/default/img/files/bg.webp": {
+    "file": "assets/bg-CIFYnVT3.webp",
+    "src": "public/themes/default/img/files/bg.webp"
+  },
+  "public/themes/default/img/files/wave-line.png": {
+    "file": "assets/wave-line-CIEgBAnf.png",
+    "src": "public/themes/default/img/files/wave-line.png"
+  },
+  "public/themes/default/img/files/waves.png": {
+    "file": "assets/waves-BGPnxgJW.png",
+    "src": "public/themes/default/img/files/waves.png"
+  },
+  "public/themes/default/img/files/world.png": {
+    "file": "assets/world-CMNy-fNt.png",
+    "src": "public/themes/default/img/files/world.png"
+  },
+  "public/themes/default/img/frontend/backgrounds/pattern.svg": {
+    "file": "assets/pattern-LgbXdP9a.svg",
+    "src": "public/themes/default/img/frontend/backgrounds/pattern.svg"
+  },
+  "resources/views/classic/scss/dashboard.scss": {
+    "file": "assets/dashboard-8c4Ph4gl.css",
+    "src": "resources/views/classic/scss/dashboard.scss",
+    "isEntry": true
+  },
+  "resources/views/default/scss/dashboard.scss": {
+    "file": "assets/dashboard-DdeUpZDl.css",
+    "src": "resources/views/default/scss/dashboard.scss",
+    "isEntry": true
+  },
+  "resources/views/default/scss/frontend.scss": {
+    "file": "assets/frontend-BNtx0LWd.css",
+    "src": "resources/views/default/scss/frontend.scss",
+    "isEntry": true
+  },
+  "resources/views/sonic/scss/dashboard.scss": {
+    "file": "assets/dashboard-CZEuRAHB.css",
+    "src": "resources/views/sonic/scss/dashboard.scss",
+    "isEntry": true
+  },
+  "resources/views/sonic/scss/frontend.scss": {
+    "file": "assets/frontend-DZuc95vL.css",
+    "src": "resources/views/sonic/scss/frontend.scss",
+    "isEntry": true
+  }
+}
